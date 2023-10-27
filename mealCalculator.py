@@ -1,10 +1,14 @@
 import json
 
+#opens json that contains the food data
 openJson = open('food.json')
+#load json that contains the food data
 foodLibrary = json.load(openJson)
+#initializez a finished variable 
 finished = False
 foodMeal = []
 nutrientsMeal = [0,0,0,0]
+
 
 def calorieCounter(foodEaten,quantityEaten):
     nutritionalCounterProteins=quantityEaten*foodLibrary["foods"][foodEaten]["proteins"]/100
@@ -20,7 +24,9 @@ def calorieCounter(foodEaten,quantityEaten):
             " fats: "+str(nutritionalCounterFats)+"\n"+
             " carbohydrates:"+str(nutritionalCounterCarbohydrates)+"\n"
             " calories:"+str(nutritionalCounterCalories)+"\n")
-def mealTracker(    ):
+
+
+def mealTracker():
     print("So you ate: "+ str(foodMeal)+" and your nutritional value for this meal is: \n"+
           "proteins: "+str(nutrientsMeal[0])+ "\n"
           "fats: "+str(nutrientsMeal[1])+ "\n"
@@ -39,10 +45,12 @@ while finished == False:
             try:
                 quantityEaten = float(input("And how much did you eat?: "))
                 calorieCounter(foodEaten,quantityEaten)
-                mealTracker()
                 correct=True
             except ValueError:
                 print("The type of input you are trying to enter is invalid. Please try a numeric type.")
+    elif foodEaten=="Finished":
+        mealTracker()
+        finished=True
     elif foodEaten=="":
         print("You haven't provided a meal") 
         break
